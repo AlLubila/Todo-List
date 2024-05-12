@@ -1,52 +1,55 @@
+// Import React library
 import React, { useState } from "react";
 
+// Define props interface
 interface Props {
-  // A function that adds a new task to the list
+  // Function to add a new task
   addTask: (newTask: string) => void;
+  // Function to remove a task
+  removeTask: (task: string) => void;
 }
 
-// The main component that displays a form for adding new tasks
-export default function Header({ addTask }: Props) {
-  
-  // The state of the new task input field
+// Define the Header component
+export default function Header({ addTask, removeTask }: Props) {
+  // State for the new task input field
   const [newTask, setNewTask] = useState("");
 
-  // The event handler for the input field change
+  // Event handler for input field change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Update the new task state with input field value
     setNewTask(e.target.value);
   };
 
-  // The event handler for adding a new task
+  // Event handler for adding a new task
   const handleAdd = () => {
     // Check if the new task is not empty
-    if (newTask!== "") {
+    if (newTask !== "") {
       // Add the new task to the list
       addTask(newTask);
-
       // Reset the new task input field
       setNewTask("");
     }
   };
 
-  // Render the component's UI
+  // Render the component
   return (
     <>
-      {/* The header of the task list */}
+      {/* Header section */}
       <div className="flex flex-row justify-between py-6">
-        {/* The title of the task list */}
+        {/* Title */}
         <div>
           <h1 className="text-3xl">ToDo List</h1>
         </div>
-        {/* The form for adding new tasks */}
+        {/* Form for adding new tasks */}
         <div>
-          {/* The input field for the new task */}
+          {/* Input field for new task */}
           <input
             type="text"
             className="border border-neutral-950 py-2 pl-5 pr-16 focus:outline-none"
             value={newTask}
             onChange={handleChange}
           />
-          {/* The button for adding the new task */}
+          {/* Button to add new task */}
           <button
             className="ml-4 px-3 bg-sky-500 text-white text-sm font-bold py-3"
             onClick={handleAdd}
